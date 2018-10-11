@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="primary">
+
+    <ion-title>Comercio</ion-title>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+  </ion-navbar>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+</ion-header>
+
+<ion-content padding>
+<ion-list>
+  <ion-item *ngFor="let comercio of comercios | async ; let i = index" (click)="goRubros(comercio.nombre)">
+    <ion-thumbnail item-start >
+      <img [src]="comercio.imgDirComercio">
+    </ion-thumbnail>
+    <h3 class="nombre-comercio">{{comercio.nombre | uppercase}}</h3>
+    <!-- <h3 class="nombre-comercio">{{comercio.nombre_complement}}</h3> -->
+    <h5 *ngIf="comercio.abierto">ABIERTO</h5>
+    <h5 *ngIf="!comercio.abierto">CERRADO</h5>
+    <!-- <button ion-button clear item-end >Entrar</button> -->
+  </ion-item>
+</ion-list>
+
+
+
+
+</ion-content>

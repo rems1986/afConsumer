@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar color="primary">
+  
+    <ion-title>Pedido </ion-title>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-buttons end>
+      <button ion-button small color="light">
+        <!-- <ion-icon name="cash"></ion-icon><br> -->
+        Subtotal
+        {{subTotal | currency:'L.'}}
+
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-list>
+  <ion-item
+  *ngFor="let producto of carrito; let i = index;"
+  >
+    <ion-thumbnail  item-start>
+      <img class="imgProd" [src]="producto.producto.imgDirProducto">
+    </ion-thumbnail>
+
+    <div class="infoDiv">
+      <h3 class="">{{producto.producto.nombreProducto | uppercase}}</h3>
+      <h5 class="">{{producto.producto.unidad | uppercase}}</h5>
+      <h5 class="">{{producto.producto.precio | currency:'L.'}}</h5>
+      <ion-buttons>
+        <button ion-button icon-only small color="light" (click)="eliminar(i);">
+          <ion-icon name="ios-trash-outline"></ion-icon>
+        </button>
+      </ion-buttons>
+    </div>
+    <div class="counterDiv">
+      <ion-buttons >
+        <ion-badge item-end>Cantidad {{producto.cantidad}}</ion-badge>
+        <br>
+        <button ion-button icon-only small color="light" (click)="disminuir(i);">
+          <ion-icon name="remove-circle"></ion-icon>
+        </button>
+        <button ion-button icon-only small color="light" (click)="aumentar(i);">
+          <ion-icon ios="ios-add-circle" md="md-add-circle" ></ion-icon>
+        </button>
+      </ion-buttons>
+      <br>
+      <ion-badge item-end color="secondary">subtotal: {{producto.cantidad*producto.producto.precio| currency:'L.'}}</ion-badge>
+    </div>
+
+  </ion-item>
+</ion-list>
+
+
+</ion-content>
